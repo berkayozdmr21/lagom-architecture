@@ -1,0 +1,1212 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#0b0b0a" />
+    <meta
+      name="description"
+      content="Lagom Architecture — mimari tasarım, iç mekân ve görselleştirme stüdyosu."
+    />
+    <title>Lagom Architecture — Mimarlık & İç Mekân</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <style>
+      :root {
+        --ink: #0b0b0a;
+        --paper: #f2efe8;
+        --muted: #9a978f;
+        --gold: #d4af37;
+        --line: #ffffff24;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: var(--ink);
+        color: var(--paper);
+        font-family: Manrope, Arial, sans-serif;
+        overflow: hidden;
+      }
+      button,
+      a {
+        color: inherit;
+        font: inherit;
+      }
+      a {
+        text-decoration: none;
+      }
+      button {
+        border: 0;
+        cursor: pointer;
+      }
+      .grain {
+        position: fixed;
+        inset: 0;
+        z-index: 90;
+        pointer-events: none;
+        opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+      .header {
+        position: fixed;
+        inset: 0 0 auto;
+        height: 92px;
+        padding: 0 clamp(24px, 5vw, 76px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 80;
+        background: linear-gradient(#0b0b0add, transparent);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .mark {
+        width: 26px;
+        height: 26px;
+        border: 1px solid var(--gold);
+        display: grid;
+        place-items: center;
+        transform: rotate(45deg);
+      }
+      .mark:after {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background: var(--gold);
+      }
+      .brand span,
+      .gold {
+        color: var(--gold);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: clamp(18px, 2.4vw, 38px);
+      }
+      .nav a {
+        position: relative;
+        padding: 10px 0;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #bbb9b2;
+      }
+      .nav a:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 2px;
+        width: 100%;
+        height: 1px;
+        background: var(--gold);
+        transform: scaleX(0);
+        transition: 0.4s;
+      }
+      .nav a:hover,
+      .nav a.active {
+        color: #fff;
+      }
+      .nav a:hover:after,
+      .nav a.active:after {
+        transform: scaleX(1);
+      }
+      .nav .contact {
+        border: 1px solid #d4af37aa;
+        padding: 11px 17px;
+        color: var(--gold);
+      }
+      .menu {
+        display: none;
+        background: none;
+        width: 42px;
+        height: 42px;
+        position: relative;
+      }
+      .menu i,
+      .menu:before {
+        content: "";
+        position: absolute;
+        right: 6px;
+        width: 27px;
+        height: 1px;
+        background: #fff;
+        transition: 0.3s;
+      }
+      .menu:before {
+        top: 15px;
+      }
+      .menu i {
+        top: 25px;
+        width: 19px;
+      }
+      .menu.open:before {
+        top: 21px;
+        transform: rotate(45deg);
+      }
+      .menu.open i {
+        top: 21px;
+        width: 27px;
+        transform: rotate(-45deg);
+      }
+      .main,
+      .gallery {
+        width: 100%;
+        height: 100%;
+      }
+      .swiper-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg,
+      .blur-bg {
+        position: absolute;
+        inset: -30px;
+        background-size: cover;
+        background-position: center;
+      }
+      .hero-bg:after,
+      .blur-bg:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, #080807f0, #08080788 55%, #08080755);
+      }
+      .intro-slide {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        isolation: isolate;
+        background: #080807;
+        overflow: hidden;
+        z-index: 95;
+        touch-action: none;
+      }
+      .intro-slide::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        background:
+          radial-gradient(circle at 50% 42%, rgba(212, 175, 55, 0.08), transparent 38%),
+          linear-gradient(120deg, #070706, #11110f 52%, #080807);
+      }
+      .intro-slide::after {
+        content: "";
+        position: absolute;
+        inset: clamp(18px, 3vw, 44px);
+        z-index: -1;
+        border: 1px solid rgba(212, 175, 55, 0.18);
+        pointer-events: none;
+      }
+      .intro-content {
+        position: relative;
+        width: 96vw;
+        text-align: center;
+        transform-origin: 50% 50%;
+      }
+      .intro-kicker {
+        position: absolute;
+        bottom: calc(100% + clamp(24px, 4vh, 48px));
+        width: 100%;
+        color: var(--gold);
+        font-size: 9px;
+        letter-spacing: 0.45em;
+        text-transform: uppercase;
+      }
+      .intro-title {
+        margin: 0;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(64px, 13.8vw, 290px);
+        font-weight: 700;
+        line-height: 0.88;
+        letter-spacing: -0.065em;
+        text-transform: uppercase;
+        transform-origin: 50% 50%;
+        will-change: transform;
+        transition: transform 750ms cubic-bezier(.22,1,.36,1);
+      }
+      .intro-slide .intro-kicker { transition: opacity 300ms ease; }
+      .intro-slide .intro-scroll { transition: opacity 300ms ease; }
+      .intro-slide.entering { transition: opacity 1100ms ease 3100ms; opacity: 0; }
+      @keyframes intro-enter-zoom {
+        0% { transform: scale(1); }
+        20% { transform: scale(1.5); }
+        40% { transform: scale(2.6); }
+        60% { transform: scale(5); }
+        80% { transform: scale(14); }
+        100% { transform: scale(90); }
+      }
+      .intro-slide.zoomed .intro-kicker,
+      .intro-slide.zoomed .intro-scroll { opacity: 0; }
+      .intro-title span {
+        display: block;
+        padding-right: 0.06em;
+        color: transparent;
+        background: url("Enginler İnşaat/C1.jpg") center 46% / cover no-repeat;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: saturate(0.95) brightness(1.18) contrast(1.04);
+      }
+      .intro-title span:first-child { font-size: 1.6em; }
+      .intro-title span:last-child {
+        font-size: 0.92em;
+        background-position: center 68%;
+      }
+      .intro-scroll {
+        position: absolute;
+        left: 50%;
+        bottom: clamp(34px, 6vh, 68px);
+        display: grid;
+        justify-items: center;
+        gap: 12px;
+        transform: translateX(-50%);
+        color: #8c8981;
+        font-size: 8px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+      }
+      .intro-scroll::after {
+        content: "";
+        width: 1px;
+        height: 38px;
+        background: linear-gradient(var(--gold), transparent);
+        animation: intro-scroll 1.8s ease-in-out infinite;
+      }
+      @keyframes intro-scroll {
+        0%, 100% { transform: scaleY(0.45); transform-origin: top; opacity: 0.35; }
+        50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      }
+      body.intro-active .header,
+      body.intro-active .progress,
+      body.intro-active .hint {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .header,
+      .progress,
+      .hint {
+        transition: opacity 0.55s ease, visibility 0.55s ease;
+      }
+      .pages .swiper-pagination-bullet:first-child { display: none; }
+      .blur-bg {
+        filter: blur(22px);
+        opacity: 0.34;
+        transform: scale(1.12);
+      }
+      .hero-grid {
+        position: relative;
+        z-index: 2;
+        width: min(1380px, 88vw);
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: clamp(40px, 7vw, 110px);
+        align-items: center;
+        padding-top: 50px;
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        color: var(--gold);
+        font-size: 10px;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+      }
+      .eyebrow:before {
+        content: "";
+        width: 44px;
+        height: 1px;
+        background: var(--gold);
+      }
+      h1 {
+        font:
+          500 clamp(52px, 6.1vw, 98px) / 0.91 "Playfair Display",
+          serif;
+        letter-spacing: -0.04em;
+        margin: 27px 0;
+      }
+      h1 em {
+        color: var(--gold);
+      }
+      .intro {
+        max-width: 540px;
+        color: #b3b1aa;
+        font-size: 14px;
+        line-height: 1.85;
+      }
+      .discover {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-top: 35px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-size: 10px;
+      }
+      .discover b {
+        display: grid;
+        place-items: center;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: #111;
+        font-size: 18px;
+        transition: 0.4s;
+      }
+      .discover:hover b {
+        transform: translateX(5px);
+      }
+      .hero-img {
+        position: relative;
+        height: min(66vh, 680px);
+        overflow: hidden;
+      }
+      .hero-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 1.2s var(--ease);
+      }
+      .hero-img:hover img {
+        transform: scale(1.035);
+      }
+      .hero-img:before {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        z-index: 1;
+        border: 1px solid #ffffff33;
+      }
+      .badge {
+        position: absolute;
+        right: -28px;
+        bottom: 35px;
+        z-index: 3;
+        background: var(--gold);
+        color: #111;
+        padding: 17px 21px;
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        writing-mode: vertical-rl;
+      }
+      .label {
+        position: absolute;
+        left: clamp(24px, 5vw, 76px);
+        top: 112px;
+        z-index: 12;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 10px;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: #b8b5ad;
+      }
+      .label:after {
+        content: "";
+        width: 72px;
+        height: 1px;
+        background: #d4af3788;
+      }
+      .card {
+        position: relative;
+        z-index: 2;
+        width: min(1180px, 82vw);
+        height: min(69vh, 700px);
+        margin-top: 54px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 280px;
+        background: #10100f;
+        border: 1px solid var(--line);
+        box-shadow: 0 35px 100px #0007;
+      }
+      .image {
+        position: relative;
+        overflow: hidden;
+      }
+      .image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 1s var(--ease);
+      }
+      .image:hover img {
+        transform: scale(1.025);
+      }
+      .info {
+        padding: 38px 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-left: 1px solid var(--line);
+      }
+      .cat {
+        font-size: 9px;
+        letter-spacing: 0.23em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      h2 {
+        font:
+          500 clamp(28px, 3vw, 42px) / 1.05 "Playfair Display",
+          serif;
+        margin: 14px 0;
+      }
+      .info p {
+        color: #8f8d87;
+        font-size: 11px;
+        line-height: 1.7;
+      }
+      .meta {
+        display: grid;
+        gap: 13px;
+        padding-top: 23px;
+        border-top: 1px solid var(--line);
+        font-size: 9px;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: #aaa;
+      }
+      .meta div {
+        display: flex;
+        justify-content: space-between;
+      }
+      .meta span:last-child {
+        color: #fff;
+      }
+      .zoom {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: #0b0b0ab8;
+        border: 1px solid #ffffff44;
+        color: #fff;
+        font-size: 18px;
+        backdrop-filter: blur(8px);
+      }
+      .zoom:hover {
+        background: var(--gold);
+        color: #111;
+      }
+      .gallery .swiper-button-next,
+      .gallery .swiper-button-prev {
+        top: auto;
+        bottom: 6.5%;
+        width: 48px;
+        height: 48px;
+        border: 1px solid #d4af3799;
+        border-radius: 50%;
+        background: #0b0b0add;
+        color: var(--gold);
+      }
+      .gallery .swiper-button-prev {
+        left: max(7vw, calc(50% - 590px));
+      }
+      .gallery .swiper-button-next {
+        left: max(calc(7vw + 60px), calc(50% - 530px));
+      }
+      .gallery .swiper-button-next:after,
+      .gallery .swiper-button-prev:after {
+        font-size: 13px;
+      }
+      .progress {
+        position: fixed;
+        right: clamp(12px, 2vw, 34px);
+        top: 50%;
+        z-index: 70;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      .pages {
+        display: flex !important;
+        position: static !important;
+        flex-direction: column;
+        gap: 11px;
+      }
+      .pages .swiper-pagination-bullet {
+        width: 5px;
+        height: 5px;
+        margin: 0 !important;
+        background: #fff;
+        opacity: 0.35;
+        transition: 0.4s;
+      }
+      .pages .swiper-pagination-bullet-active {
+        height: 30px;
+        border-radius: 4px;
+        background: var(--gold);
+        opacity: 1;
+      }
+      .number {
+        font-size: 9px;
+        color: var(--gold);
+        writing-mode: vertical-rl;
+      }
+      .hint {
+        position: fixed;
+        left: clamp(24px, 5vw, 76px);
+        bottom: 28px;
+        z-index: 65;
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #777;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .hint:before {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: var(--gold);
+      }
+      .contact-wrap {
+        position: relative;
+        z-index: 2;
+        width: min(1180px, 86vw);
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 8vw;
+        align-items: center;
+      }
+      .contact-title {
+        font:
+          500 clamp(48px, 7vw, 105px) / 0.92 "Playfair Display",
+          serif;
+        margin: 20px 0 30px;
+      }
+      .contact-title em {
+        color: var(--gold);
+      }
+      .contact-copy {
+        max-width: 520px;
+        color: #aaa;
+        line-height: 1.8;
+        font-size: 13px;
+      }
+      .contact-list {
+        border-top: 1px solid var(--line);
+      }
+      .contact-list a {
+        display: flex;
+        justify-content: space-between;
+        padding: 22px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        transition: 0.3s;
+      }
+      .contact-list a:hover {
+        padding-left: 10px;
+        color: var(--gold);
+      }
+      .contact-list b {
+        font-size: 22px;
+        font-weight: 300;
+      }
+      .contact-form {
+        display: grid;
+        gap: 17px;
+        padding: clamp(24px, 3vw, 42px);
+        background: rgba(18, 18, 16, 0.82);
+        border: 1px solid var(--line);
+      }
+      .contact-form label {
+        display: grid;
+        gap: 8px;
+        color: #aaa8a1;
+        font-size: 9px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 12px 0;
+        border: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        outline: none;
+        background: transparent;
+        color: #fff;
+        font: 13px Manrope, sans-serif;
+        resize: none;
+      }
+      .contact-form input:focus,
+      .contact-form textarea:focus {
+        border-color: var(--gold);
+      }
+      .contact-form textarea { min-height: 90px; }
+      .contact-form button {
+        padding: 14px 20px;
+        background: var(--gold);
+        color: #111;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+      .contact-form button:disabled { opacity: 0.55; cursor: wait; }
+      .form-status { min-height: 18px; margin: 0; color: #aaa; font-size: 11px; }
+      .form-status.success { color: #a8c99e; }
+      .form-status.error { color: #e89b8f; }
+      .company-field { position: absolute !important; left: -10000px !important; }
+      .portrait {
+        height: 62vh;
+        min-height: 430px;
+        background: url("Konut 1/ÇALIŞMA ODASI 2.png") center/cover;
+      }
+      .note {
+        font-size: 9px;
+        color: #777;
+        margin-top: 28px;
+      }
+      .mobile-nav {
+        position: fixed;
+        inset: 0;
+        z-index: 75;
+        background: #0b0b0afa;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 12vw;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.4s;
+      }
+      .mobile-nav.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .mobile-nav a {
+        font:
+          500 clamp(35px, 10vw, 58px) "Playfair Display",
+          serif;
+        padding: 10px 0;
+      }
+      .mobile-nav small {
+        color: var(--gold);
+        font: 9px Manrope;
+        margin-right: 12px;
+      }
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        background: #050504f7;
+        display: grid;
+        place-items: center;
+        padding: 5vw;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.35s;
+      }
+      .lightbox.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .lightbox img {
+        max-width: 90vw;
+        max-height: 85vh;
+      }
+      .lightbox button {
+        position: absolute;
+        right: 30px;
+        top: 25px;
+        background: none;
+        color: #fff;
+        font-size: 32px;
+      }
+      @media (max-width: 1100px) {
+        .nav {
+          display: none;
+        }
+        .menu {
+          display: block;
+        }
+        .card {
+          grid-template-columns: minmax(0, 1fr) 240px;
+        }
+      }
+      @media (max-width: 760px) {
+        .intro-content { width: calc(100% - 34px); }
+        .intro-title { font-size: 13.8vw; line-height: 0.96; }
+        .intro-kicker { letter-spacing: 0.28em; }
+        .intro-slide::after { inset: 12px; }
+        .header {
+          height: 72px;
+          padding: 0 20px;
+        }
+        .brand {
+          font-size: 12px;
+        }
+        .mark {
+          width: 22px;
+          height: 22px;
+        }
+        .progress {
+          right: 7px;
+        }
+        .hero-grid {
+          width: calc(100% - 40px);
+          grid-template-columns: 1fr;
+          padding-top: 48px;
+          gap: 20px;
+        }
+        h1 {
+          font-size: clamp(43px, 14vw, 67px);
+          margin: 18px 0;
+        }
+        .intro {
+          font-size: 12px;
+          line-height: 1.6;
+        }
+        .discover {
+          margin-top: 20px;
+        }
+        .hero-img {
+          height: 29vh;
+          min-height: 190px;
+        }
+        .badge {
+          right: 0;
+          bottom: 0;
+          padding: 10px;
+          writing-mode: initial;
+        }
+        .label {
+          left: 20px;
+          top: 82px;
+        }
+        .card {
+          width: calc(100% - 40px);
+          height: 72vh;
+          margin-top: 55px;
+          grid-template-columns: 1fr;
+          grid-template-rows: minmax(0, 1fr) auto;
+        }
+        .info {
+          padding: 16px 20px;
+          border: 0;
+          border-top: 1px solid var(--line);
+        }
+        .info h2 {
+          font-size: 25px;
+          margin: 5px 0;
+        }
+        .info p,
+        .meta {
+          display: none;
+        }
+        .gallery .swiper-button-next,
+        .gallery .swiper-button-prev {
+          bottom: 25%;
+          width: 42px;
+          height: 42px;
+        }
+        .gallery .swiper-button-prev {
+          left: 26px;
+        }
+        .gallery .swiper-button-next {
+          left: 78px;
+        }
+        .contact-wrap {
+          width: calc(100% - 42px);
+          grid-template-columns: 1fr;
+          max-height: 84vh;
+          overflow-y: auto;
+          padding: 30px 0;
+        }
+        .portrait {
+          display: none;
+        }
+        .contact-title {
+          font-size: 15vw;
+        }
+        .hint {
+          display: none;
+        }
+        .pages .swiper-pagination-bullet-active {
+          height: 22px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="intro-active">
+    <div class="grain"></div>
+    <header class="header">
+      <a class="brand" href="#" data-go="1"
+        ><i class="mark"></i>
+        <div>LAGOM <span>Architecture</span></div></a
+      >
+      <nav class="nav">
+        <a class="active" href="#" data-go="0">Ana Sayfa</a
+        ><a href="#" data-go="1">Cephe</a><a href="#" data-go="2">Konut</a
+        ><a href="#" data-go="3">Mağaza</a><a href="#" data-go="4">Otel</a
+        ><a class="contact" href="#" data-go="5">İletişim</a>
+      </nav>
+      <button class="menu" aria-label="Menüyü aç"><i></i></button>
+    </header>
+    <nav class="mobile-nav">
+      <a href="#" data-go="0"><small>01</small>Ana Sayfa</a
+      ><a href="#" data-go="1"><small>02</small>Cephe</a
+      ><a href="#" data-go="2"><small>03</small>Konut</a
+      ><a href="#" data-go="3"><small>04</small>Mağaza</a
+      ><a href="#" data-go="4"><small>05</small>Otel</a
+      ><a href="#" data-go="5"><small>06</small>İletişim</a>
+    </nav>
+    <main class="swiper main">
+      <div class="swiper-wrapper" id="sections">
+        <section class="swiper-slide intro-slide" aria-label="Lagom Architecture giriş">
+          <div class="intro-content">
+            <div class="intro-kicker">Mimarlık · İç Mekân · Görselleştirme</div>
+            <h1 class="intro-title"><span>Lagom</span><span>Architecture</span></h1>
+          </div>
+          <div class="intro-scroll">Keşfetmek için kaydır</div>
+        </section>
+        <section class="swiper-slide hero">
+          <div
+            class="hero-bg"
+            style="background-image: url(&quot;Enginler İnşaat/C1.jpg&quot;)"
+          ></div>
+          <div class="hero-grid">
+            <div>
+              <div class="eyebrow">Mimarlık · İç Mekân · Görselleştirme</div>
+              <h1>Mekânı<br /><em>dengeyle</em><br />tasarlıyoruz.</h1>
+              <p class="intro">
+                İşlev, estetik ve yalınlığı aynı çizgide buluşturan; yaşamın
+                ritmine uyum sağlayan çağdaş mekânlar üretiyoruz.
+              </p>
+              <a class="discover" href="#" data-go="2"
+                ><b>→</b>Seçili projeleri keşfet</a
+              >
+            </div>
+            <div class="hero-img">
+              <img
+                src="Enginler İnşaat/C1.jpg"
+                alt="Lagom Architecture cephe tasarımı"
+              /><span class="badge">Seçili İş · 2026</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <aside class="progress">
+      <span class="number">01 / 06</span>
+      <div class="pages"></div>
+    </aside>
+    <div class="hint">Kaydırarak keşfet</div>
+    <div class="lightbox" role="dialog" aria-modal="true">
+      <button aria-label="Kapat">×</button><img alt="" />
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="site-content.js"></script>
+    <script src="intro-transition.js"></script>
+    <script>
+      const fallbackGroups = [
+        {
+          label: "Cephe Tasarımı",
+          folders: [
+            ["Enginler İnşaat", ["C1.jpg", "C2.jpg", "C3.jpg", "C4.jpg"]],
+          ],
+          year: "2026",
+        },
+        {
+          label: "Konut Projeleri",
+          folders: [
+            [
+              "Konut 1",
+              [
+                "ANTRE 1.png",
+                "ANTRE 2.png",
+                "ANTRE 3.png",
+                "ANTRE 4.png",
+                "ANTRE 5.png",
+                "ANTRE 6.png",
+                "BANYO 1.png",
+                "BANYO 2.png",
+                "BANYO 3.png",
+                "E. BANNYO 1.png",
+                "E. BANYO 2.png",
+                "E. BANYO 3.png",
+                "GENÇ BANYO 1.png",
+                "GENÇ BANYO 2.png",
+                "GENÇ ODASI 1.png",
+                "GENÇ ODASI 2.png",
+                "GENÇ ODASI 3.png",
+                "GENÇ ODASI 4.png",
+                "MUTFAK 1.png",
+                "MUTFAK 2.png",
+                "MUTFAK 3.png",
+                "MUTFAK 4.png",
+                "MUTFAK 5.png",
+                "YATAK ODASI 1.png",
+                "ÇALIŞMA ODASI 1.png",
+                "ÇALIŞMA ODASI 2.png",
+                "ÇALIŞMA ODASI 3.png",
+                "ÇALIŞMA ODASI 4.png",
+                "ÇOCUK ODASI 1.png",
+                "ÇOCUK ODASI 2.png",
+                "ÇOCUK ODASI 3.png",
+              ],
+            ],
+            [
+              "Konut 2",
+              [
+                "SALON 1.png",
+                "SALON 2.png",
+                "SALON 3.png",
+                "YATAK ODASI 1.png",
+                "YATAK ODASI 2.png",
+                "YATAK ODASI 3.png",
+              ],
+            ],
+          ],
+          year: "2025",
+        },
+        {
+          label: "Mağaza & Showroom",
+          folders: [
+            [
+              "Anka Seramik",
+              [
+                "VİTRİN 1.png",
+                "VİTRİN 2.png",
+                "VİTRİN 3.png",
+                "TEŞHİR 1.png",
+                "TEŞHİR 2.png",
+                "TEŞHİR 3.png",
+                "TEŞHİR 4.png",
+                "TEŞHİR 5.png",
+                "TEŞHİR 6.png",
+                "TEŞHİR 7.png",
+              ],
+            ],
+            ["Beb-ek Organik", ["1.png", "2.png", "3.png", "4.png"]],
+          ],
+          year: "2025",
+        },
+        {
+          label: "Otel & Apart",
+          folders: [
+            [
+              "Apart Otel",
+              [
+                "LOBİ 1.png",
+                "LOBİ 2.png",
+                "LOBİ 3.png",
+                "LOBİ 4.png",
+                "LOBİ 5.png",
+                "LOBİ 6.png",
+                "SALON 1.png",
+                "SALON 2.png",
+                "SALON 3.png",
+                "MUTFAK.png",
+                "BANYO.png",
+                "YATAK ODASI 1.png",
+                "YATAK ODASI 2.png",
+              ],
+            ],
+            ["Otel Oda", ["ODA 1.png", "ODA 2.png", "ODA 3.png"]],
+          ],
+          year: "2025",
+        },
+      ];
+      const managedContent = window.lagomContent;
+      const groups = managedContent
+        ? managedContent.sections.map((section) => ({
+            label: section.label,
+            files: section.projects.flatMap((project) =>
+              project.images.map((src) => ({
+                src,
+                folder: project.name,
+                name: src.split("/").pop(),
+                year: project.year,
+                description: project.description,
+              })),
+            ),
+          }))
+        : fallbackGroups;
+      const title = (n) =>
+          n
+            .replace(/\.(png|jpg)$/i, "")
+            .replace(/\s+\d+$/, "")
+            .toLocaleLowerCase("tr")
+            .replace(/(^|\s)\S/g, (s) => s.toLocaleUpperCase("tr"))
+            .replace("E. BannyO", "Ebeveyn Banyosu")
+            .replace("E. Banyo", "Ebeveyn Banyosu"),
+        wrap = document.querySelector("#sections");
+
+      if (managedContent) {
+        document.querySelector(".hero .eyebrow").textContent = managedContent.home.eyebrow;
+        document.querySelector(".hero .intro").textContent = managedContent.home.description;
+        document.querySelector(".hero h1").textContent = managedContent.home.title;
+      }
+
+      groups.forEach((g, x) => {
+        const fs = g.files || g.folders.flatMap(([folder, names]) =>
+          names.map((name) => ({ folder, name, src: `${folder}/${name}` })),
+        ),
+          s = document.createElement("section");
+        s.className = "swiper-slide";
+        s.innerHTML = `<div class="label"><span class="gold">${String(x + 2).padStart(2, "0")}</span>${g.label}</div><div class="swiper gallery"><div class="swiper-wrapper">${fs.map((f, i) => `<article class="swiper-slide"><div class="blur-bg" style="background-image:url('${f.src}')"></div><div class="card"><div class="image"><img src="${f.src}" alt="${title(f.name)} — ${f.folder}" loading="lazy"><button class="zoom" data-src="${f.src}" data-alt="${title(f.name)}" aria-label="Büyüt">↗</button></div><div class="info"><div><div class="cat">${g.label} · ${String(i + 1).padStart(2, "0")}</div><h2>${title(f.name)}</h2><p>${f.description || "Malzeme, ışık ve işlevin dengeli birlikteliğiyle biçimlenen çağdaş bir Lagom mekânı."}</p></div><div class="meta"><div><span>Proje</span><span>${f.folder}</span></div><div><span>Yıl</span><span>${f.year || g.year}</span></div><div><span>Görsel</span><span>${i + 1} / ${fs.length}</span></div></div></div></div></article>`).join("")}</div><div class="swiper-button-prev"></div><div class="swiper-button-next"></div></div>`;
+        wrap.appendChild(s);
+      });
+      const c = document.createElement("section");
+      c.className = "swiper-slide";
+      const contact = managedContent?.contact || { title: "Birlikte tasarlayalım.", description: "Hayalinizdeki mekânı konuşmak, projelerimiz hakkında bilgi almak veya iş birliği başlatmak için bize ulaşın.", email: "berkay.oz3321@gmail.com", instagram: "https://www.instagram.com/lagomarchitecture/", linkedin: "https://www.linkedin.com/in/bet%C3%BCl-g%C3%B6k-%C3%B6zdemir-360912194/" };
+      c.innerHTML = `<div class="contact-wrap"><div><div class="eyebrow">Yeni bir proje için</div><h2 class="contact-title">${contact.title}</h2><p class="contact-copy">${contact.description}</p><div class="contact-list"><a href="${contact.instagram}" target="_blank" rel="noopener">Instagram <b>↗</b></a><a href="${contact.linkedin}" target="_blank" rel="noopener">LinkedIn <b>↗</b></a></div><div class="note">© 2026 Lagom Architecture · Tüm hakları saklıdır.</div></div><form class="contact-form" id="contact-form"><label>Adınız ve soyadınız<input name="name" autocomplete="name" maxlength="100" required></label><label>E-posta adresiniz<input name="email" type="email" autocomplete="email" maxlength="160" required></label><label>İsteğiniz<textarea name="message" maxlength="3000" placeholder="Projenizden ve ihtiyaçlarınızdan kısaca bahsedin..." required></textarea></label><label class="company-field" aria-hidden="true">Şirket<input name="company" tabindex="-1" autocomplete="off"></label><button type="submit">İsteği gönder →</button><p class="form-status" role="status"></p></form></div>`;
+      wrap.appendChild(c);
+
+      const contactForm = document.querySelector("#contact-form");
+      contactForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const button = contactForm.querySelector("button");
+        const status = contactForm.querySelector(".form-status");
+        const values = Object.fromEntries(new FormData(contactForm));
+        button.disabled = true;
+        status.className = "form-status";
+        status.textContent = "İsteğiniz gönderiliyor...";
+        try {
+          const response = await fetch("/api/inquiries", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(values),
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || "Gönderilemedi");
+          contactForm.reset();
+          status.className = "form-status success";
+          status.textContent = "Teşekkürler. İsteğiniz bize ulaştı.";
+        } catch (error) {
+          status.className = "form-status error";
+          status.textContent = error.message;
+        } finally {
+          button.disabled = false;
+        }
+      });
+
+      const totalSlides = groups.length + 3;
+      const contentSlides = totalSlides - 1;
+      document.querySelector(".number").textContent = `01 / ${String(contentSlides).padStart(2, "0")}`;
+      const desktopNav = document.querySelector(".nav");
+      const mobileNav = document.querySelector(".mobile-nav");
+      desktopNav.innerHTML = `<a class="active" href="#" data-go="1">Ana Sayfa</a>${groups.map((group, index) => `<a href="#" data-go="${index + 2}">${group.label}</a>`).join("")}<a class="contact" href="#" data-go="${totalSlides - 1}">İletişim</a>`;
+      mobileNav.innerHTML = `<a href="#" data-go="1"><small>01</small>Ana Sayfa</a>${groups.map((group, index) => `<a href="#" data-go="${index + 2}"><small>${String(index + 2).padStart(2, "0")}</small>${group.label}</a>`).join("")}<a href="#" data-go="${totalSlides - 1}"><small>${String(contentSlides).padStart(2, "0")}</small>İletişim</a>`;
+      new Swiper(".gallery", {
+        nested: true,
+        speed: 900,
+        keyboard: { enabled: true },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        effect: "creative",
+        creativeEffect: {
+          prev: { shadow: true, translate: ["-12%", 0, -1] },
+          next: { translate: ["100%", 0, 0] },
+        },
+      });
+      const introSlide = document.querySelector(".intro-slide"),
+        menu = document.querySelector(".menu"),
+        mobile = document.querySelector(".mobile-nav"),
+        nav = [...document.querySelectorAll(".nav a")],
+        introPlaceholder = document.createElement("div");
+      // Keep the existing navigation indexes; the opening itself is a fixed overlay.
+      introPlaceholder.className = "swiper-slide";
+      introPlaceholder.setAttribute("aria-hidden", "true");
+      introSlide.replaceWith(introPlaceholder);
+      document.body.appendChild(introSlide);
+      const main = new Swiper(".main", {
+          direction: "vertical",
+          initialSlide: 1,
+          speed: 1100,
+          mousewheel: { thresholdDelta: 25 },
+          keyboard: { enabled: true },
+          pagination: { el: ".pages", clickable: true },
+          on: {
+            slideChange(s) {
+              document.querySelector(".number").textContent =
+                `${String(Math.max(1, s.activeIndex)).padStart(2, "0")} / ${String(contentSlides).padStart(2, "0")}`;
+              nav.forEach((a, i) =>
+                a.classList.toggle("active", i === s.activeIndex - 1),
+              );
+              mobile.classList.remove("open");
+              menu.classList.remove("open");
+            },
+            init(s) { s.allowSlidePrev = false; },
+            slideChangeTransitionEnd(s) { s.allowSlidePrev = s.activeIndex > 1; },
+          },
+        });
+      setupLagomIntro(main, introSlide);
+      document.querySelectorAll("[data-go]").forEach(
+        (e) =>
+          (e.onclick = (v) => {
+            v.preventDefault();
+            main.slideTo(+e.dataset.go);
+          }),
+      );
+      menu.onclick = () => {
+        menu.classList.toggle("open");
+        mobile.classList.toggle("open");
+      };
+      const box = document.querySelector(".lightbox"),
+        bi = box.querySelector("img");
+      document.addEventListener("click", (e) => {
+        if (e.target.closest(".zoom")) {
+          let z = e.target.closest(".zoom");
+          bi.src = z.dataset.src;
+          bi.alt = z.dataset.alt;
+          box.classList.add("open");
+        }
+      });
+      box.querySelector("button").onclick = () => box.classList.remove("open");
+      box.onclick = (e) => {
+        if (e.target === box) box.classList.remove("open");
+      };
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") box.classList.remove("open");
+      });
+    </script>
+  </body>
+</html>

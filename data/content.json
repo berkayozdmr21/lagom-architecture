@@ -1,0 +1,168 @@
+{
+  "home": {
+    "eyebrow": "Mimarlık · İç Mekân · Görselleştirme ",
+    "title": "Mekânı dengeyle tasarlıyoruz.",
+    "description": "İşlev, estetik ve yalınlığı aynı çizgide buluşturan; yaşamın ritmine uyum sağlayan çağdaş mekânlar üretiyoruz."
+  },
+  "contact": {
+    "title": "Birlikte tasarlayalım.",
+    "description": "Hayalinizdeki mekânı konuşmak, projelerimiz hakkında bilgi almak veya iş birliği başlatmak için bize ulaşın.",
+    "email": "berkay.oz3321@gmail.com",
+    "instagram": "https://www.instagram.com/lagomarchitecture/",
+    "linkedin": "https://www.linkedin.com/in/bet%C3%BCl-g%C3%B6k-%C3%B6zdemir-360912194/"
+  },
+  "sections": [
+    {
+      "id": "cephe",
+      "label": "Cephe Tasarımı",
+      "projects": [
+        {
+          "id": "enginler",
+          "name": "Enginler İnşaat",
+          "year": "2026",
+          "description": "Malzeme, ışık ve işlevin dengeli birlikteliğiyle biçimlenen çağdaş bir Lagom mekânı.",
+          "images": [
+            "Enginler İnşaat/C2.jpg",
+            "Enginler İnşaat/C1.jpg",
+            "Enginler İnşaat/C3.jpg",
+            "Enginler İnşaat/C4.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "konut",
+      "label": "Konut Projeleri",
+      "projects": [
+        {
+          "id": "konut-1",
+          "name": "Konut 1",
+          "year": "2025",
+          "description": "Yaşamın ritmine uyum sağlayan çağdaş iç mekân tasarımı.",
+          "images": [
+            "uploads/1792501289559-fef657d247.webp",
+            "Konut 1/ANTRE 1.png",
+            "Konut 1/ANTRE 2.png",
+            "Konut 1/ANTRE 3.png",
+            "Konut 1/ANTRE 4.png",
+            "Konut 1/ANTRE 5.png",
+            "Konut 1/ANTRE 6.png",
+            "Konut 1/BANYO 1.png",
+            "Konut 1/BANYO 2.png",
+            "Konut 1/BANYO 3.png",
+            "Konut 1/E. BANNYO 1.png",
+            "Konut 1/E. BANYO 2.png",
+            "Konut 1/E. BANYO 3.png",
+            "Konut 1/GENÇ BANYO 1.png",
+            "Konut 1/GENÇ BANYO 2.png",
+            "Konut 1/GENÇ ODASI 1.png",
+            "Konut 1/GENÇ ODASI 2.png",
+            "Konut 1/GENÇ ODASI 3.png",
+            "Konut 1/GENÇ ODASI 4.png",
+            "Konut 1/MUTFAK 1.png",
+            "Konut 1/MUTFAK 2.png",
+            "Konut 1/MUTFAK 3.png",
+            "Konut 1/MUTFAK 4.png",
+            "Konut 1/MUTFAK 5.png",
+            "Konut 1/YATAK ODASI 1.png",
+            "Konut 1/ÇALIŞMA ODASI 1.png",
+            "Konut 1/ÇALIŞMA ODASI 2.png",
+            "Konut 1/ÇALIŞMA ODASI 3.png",
+            "Konut 1/ÇALIŞMA ODASI 4.png",
+            "Konut 1/ÇOCUK ODASI 1.png",
+            "Konut 1/ÇOCUK ODASI 2.png",
+            "Konut 1/ÇOCUK ODASI 3.png"
+          ]
+        },
+        {
+          "id": "konut-2",
+          "name": "Konut 2",
+          "year": "2025",
+          "description": "Sıcak, yalın ve işlevsel konut tasarımı.",
+          "images": [
+            "Konut 2/SALON 1.png",
+            "Konut 2/SALON 2.png",
+            "Konut 2/SALON 3.png",
+            "Konut 2/YATAK ODASI 1.png",
+            "Konut 2/YATAK ODASI 2.png",
+            "Konut 2/YATAK ODASI 3.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "magaza",
+      "label": "Mağaza & Showroom",
+      "projects": [
+        {
+          "id": "anka",
+          "name": "Anka Seramik",
+          "year": "2025",
+          "description": "Ürünleri güçlü bir mekânsal kurgu içinde öne çıkaran showroom tasarımı.",
+          "images": [
+            "Anka Seramik/VİTRİN 1.png",
+            "Anka Seramik/VİTRİN 2.png",
+            "Anka Seramik/VİTRİN 3.png",
+            "Anka Seramik/TEŞHİR 1.png",
+            "Anka Seramik/TEŞHİR 2.png",
+            "Anka Seramik/TEŞHİR 3.png",
+            "Anka Seramik/TEŞHİR 4.png",
+            "Anka Seramik/TEŞHİR 5.png",
+            "Anka Seramik/TEŞHİR 6.png",
+            "Anka Seramik/TEŞHİR 7.png"
+          ]
+        },
+        {
+          "id": "bebek",
+          "name": "Beb-ek Organik",
+          "year": "2025",
+          "description": "Marka kimliğini mekâna taşıyan özgün mağaza deneyimi.",
+          "images": [
+            "Beb-ek Organik/1.png",
+            "Beb-ek Organik/2.png",
+            "Beb-ek Organik/3.png",
+            "Beb-ek Organik/4.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "otel",
+      "label": "Otel & Apart",
+      "projects": [
+        {
+          "id": "apart",
+          "name": "Apart Otel",
+          "year": "2025",
+          "description": "Konfor ve işlevi yalın bir dilde buluşturan konaklama mekânı.",
+          "images": [
+            "Apart Otel/LOBİ 1.png",
+            "Apart Otel/LOBİ 2.png",
+            "Apart Otel/LOBİ 3.png",
+            "Apart Otel/LOBİ 4.png",
+            "Apart Otel/LOBİ 5.png",
+            "Apart Otel/LOBİ 6.png",
+            "Apart Otel/SALON 1.png",
+            "Apart Otel/SALON 2.png",
+            "Apart Otel/SALON 3.png",
+            "Apart Otel/MUTFAK.png",
+            "Apart Otel/BANYO.png",
+            "Apart Otel/YATAK ODASI 1.png",
+            "Apart Otel/YATAK ODASI 2.png"
+          ]
+        },
+        {
+          "id": "otel-oda",
+          "name": "Otel Oda",
+          "year": "2025",
+          "description": "Dinlenme deneyimini merkeze alan dengeli oda tasarımı.",
+          "images": [
+            "Otel Oda/ODA 1.png",
+            "Otel Oda/ODA 2.png",
+            "Otel Oda/ODA 3.png"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lagom — Yönetim Paneli</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="inquiries.css">
+  <link rel="stylesheet" href="panel-tabs.css">
+</head>
+<body>
+  <section id="login" class="login-screen">
+    <form id="login-form" class="login-card"><div class="logo">LAGOM <span>ARCHITECTURE</span></div><h1>Yönetim Paneli</h1><p>Site içeriğini düzenlemek için giriş yapın.</p><label>Kullanıcı adı<input id="username" type="text" autocomplete="username" required autofocus></label><label>Yönetici şifresi<input id="password" type="password" autocomplete="current-password" required></label><button class="primary">Giriş yap</button><div id="login-error" class="error"></div></form>
+  </section>
+  <div id="panel" class="panel hidden">
+    <header><div><div class="logo">LAGOM <span>ARCHITECTURE</span></div><p>Yönetim Paneli</p></div><nav class="panel-nav"><button class="panel-tab active" data-view="content-view">İçerik Yönetimi</button><button class="panel-tab" data-view="inquiries-view">İstekler <span id="nav-inquiry-count" class="nav-count">0</span></button></nav><div class="header-actions"><a href="/" target="_blank" class="secondary">Siteyi görüntüle ↗</a><button id="logout" class="text-button">Çıkış</button></div></header>
+    <main>
+      <div id="notice" class="notice hidden"></div>
+      <div id="content-view" class="panel-view"><div class="welcome"><div><span>YÖNETİM PANELİ</span><h1>Sitenizi kolayca güncelleyin.</h1><p>Değişikliklerin sitede görünmesi için işiniz bittiğinde “Kaydet” düğmesine basın.</p></div><button id="save" class="primary save">Değişiklikleri kaydet</button></div><section class="box"><div class="box-title"><div><small>GENEL</small><h2>Ana sayfa ve iletişim</h2></div><button class="collapse">−</button></div><div class="box-body form-grid"><label>Ana sayfa üst yazısı<input data-bind="home.eyebrow"></label><label class="wide">Ana başlık<input data-bind="home.title"></label><label class="wide">Ana açıklama<textarea data-bind="home.description"></textarea></label><label>İletişim başlığı<input data-bind="contact.title"></label><label>E-posta<input data-bind="contact.email" type="email"></label><label class="wide">İletişim açıklaması<textarea data-bind="contact.description"></textarea></label><label>Instagram bağlantısı<input data-bind="contact.instagram"></label><label>LinkedIn bağlantısı<input data-bind="contact.linkedin"></label></div></section><div class="section-heading"><div><small>PORTFÖY</small><h2>Proje bölümleri</h2><p>Her bölüm aşağı kaydırmada, bölümdeki fotoğraflar sağa–sola kaydırmada görünür.</p></div><button id="add-section" class="secondary">+ Yeni bölüm</button></div><div id="sections"></div></div>
+      <div id="inquiries-view" class="panel-view hidden"><div class="welcome inbox-welcome"><div><span>GELEN KUTUSU</span><h1>Proje istekleri</h1><p>Ziyaretçilerin iletişim formundan gönderdiği tüm talepler burada görünür.</p></div><button id="refresh-inquiries" class="secondary">İstekleri yenile</button></div><section class="box inquiries-box"><div class="box-title"><div><small>TALEPLER</small><h2>Tüm istekler <span id="inquiry-count" class="count">0</span></h2></div></div><div id="inquiries" class="inquiries"><p class="empty">Henüz bir istek bulunmuyor.</p></div></section></div>
+    </main>
+  </div>
+  <div id="confirm" class="modal hidden"><div><h2>Emin misiniz?</h2><p id="confirm-text"></p><div><button id="cancel" class="secondary">Vazgeç</button><button id="confirm-delete" class="danger">Evet, kaldır</button></div></div></div>
+  <script src="admin.js"></script>
+</body></html>

@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.*
+!.env.example
+data/inquiries.json
+data/*.backup.json
+data/*.tmp
+*.log
+*.txt
+.DS_Store
+Thumbs.db
+.codex/
+.agents/
+.aws/
